@@ -51,8 +51,14 @@ _Avoid_: average, rate, trend
 
 **Message**:
 One thing the user says in the conversation. May produce zero, one, or several
-Entries.
+Entries. Stored, but never displayed back as a scrollable transcript.
 _Avoid_: prompt, chat, input, utterance
+
+**Entry List**:
+The reviewable record of what the user ate — the only history surface in the app.
+Shows Entries, not Messages, each with its quantity editable and itself
+removable. Takes the place of a chat transcript.
+_Avoid_: history, transcript, log, feed, diary
 
 **Identity**:
 The three facts an Entry needs before it can be counted: what the food is, where
@@ -99,3 +105,13 @@ _Avoid_: objective, plan, program, mode
 The daily value of one Nutrient a user is aiming for, derived from Profile plus
 Goal, and overridable by the user. Always daily, never per-Window.
 _Avoid_: goal (reserved above), limit, budget, macro goal
+
+**Target Set**:
+The Targets in force from a given moment, stored as an immutable version so a
+Window spanning a change is measured against whatever was true on each Day.
+_Avoid_: snapshot, revision, version, current targets
+
+**Check-In**:
+The periodic prompt asking the user to re-state their Profile. Answering it is
+what moves Targets; ignoring it leaves them static. Disableable in settings.
+_Avoid_: reminder, nudge, weigh-in, update prompt
