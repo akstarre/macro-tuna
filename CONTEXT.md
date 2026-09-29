@@ -1,6 +1,6 @@
 # Macro Tuna
 
-A mobile web app for tracking calories and macronutrients, where all food logging
+A web app for tracking calories and macronutrients, where all food logging
 happens through conversation with an AI rather than through forms or search.
 
 ## Language
@@ -14,7 +14,7 @@ _Avoid_: meal, item, record, log entry
 
 **Nutrient**:
 A single measured quantity attached to an Entry — protein, carbohydrate, fat,
-fiber, sodium, or energy. Some are Macros, some are not.
+fiber, or sodium. Some are Macros, some are not.
 _Avoid_: macro (when speaking generally), nutrition, stat
 
 **Macro**:
@@ -36,21 +36,51 @@ The per-user local time at which a new Day begins. Defaults to midnight, and is
 configurable because late-night eating belongs to the day it felt like.
 _Avoid_: cutoff, rollover, reset time
 
-**Period**:
-The span a view aggregates over: Day, Week, or Month. Selecting a Period changes
-both the Bubbles' fill and the Targets they are measured against.
-_Avoid_: range, timeframe, tab, view
+**Window**:
+The span the Bubbles aggregate over: the current Day, the last 7 Days, or the
+last 28 Days. Always trailing from now, never a calendar week or calendar month.
+_Avoid_: period, range, timeframe, tab, view, week, month
+
+**Pace**:
+Average Nutrient intake per Day across the selected Window, which is what a
+Bubble actually displays. Compared against the daily Target, so a Bubble means
+the same thing in all three Windows.
+_Avoid_: average, rate, trend
+
+### Logging
+
+**Message**:
+One thing the user says in the conversation. May produce zero, one, or several
+Entries.
+_Avoid_: prompt, chat, input, utterance
+
+**Identity**:
+The three facts an Entry needs before it can be counted: what the food is, where
+it came from (brand or restaurant), and how much of it there was. An Entry
+missing any of them is Pending.
+_Avoid_: details, metadata, attributes
+
+**Pending**:
+The state of an Entry whose Identity is incomplete. Pending Entries are excluded
+from Pace and from the Tuna, because a total that includes half-known food is a
+lie.
+_Avoid_: draft, incomplete, unconfirmed, partial
+
+**Estimated**:
+The state of an Entry whose Nutrient values came from the AI rather than a
+database match. Always visibly marked, always editable.
+_Avoid_: guessed, approximate, inferred
 
 ### Interface
 
 **Bubble**:
 The display of one tracked Nutrient, floating above the Tuna. Its background fills
-in proportion to progress against that Nutrient's Target for the selected Period.
+in proportion to Pace against that Nutrient's daily Target.
 _Avoid_: ring, circle, widget, card
 
 **Tuna**:
 The mascot — a buff, friendly tuna fish — which doubles as the Calories display
-for the selected Period. Distinct from the Bubbles because Calories are derived.
+for the selected Window. Distinct from the Bubbles because Calories are derived.
 _Avoid_: mascot (in code), fish, avatar
 
 ### The user
@@ -66,6 +96,6 @@ maintenance. A Goal transforms a Profile into Targets.
 _Avoid_: objective, plan, program, mode
 
 **Target**:
-The value of one Nutrient a user is aiming for over one Period, derived from
-Profile plus Goal, and overridable by the user.
+The daily value of one Nutrient a user is aiming for, derived from Profile plus
+Goal, and overridable by the user. Always daily, never per-Window.
 _Avoid_: goal (reserved above), limit, budget, macro goal
