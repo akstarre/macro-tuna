@@ -9,8 +9,15 @@ happens through conversation with an AI rather than through forms or search.
 
 **Entry**:
 One logged act of eating, created from a Message. Holds the food identified, the
-quantity, and the resulting Nutrient values.
+quantity, and the resulting Nutrient values. Exists only for the current Day —
+once the Day rolls over it is folded into a Day Slot and discarded.
 _Avoid_: meal, item, record, log entry
+
+**Day Slot**:
+One of 28 fixed positions holding a single Day's Nutrient sums and the Target Set
+that applied. Written in place and reused every 28 Days, so a user's stored size
+never grows.
+_Avoid_: bucket, rollup, total, aggregate, row
 
 **Nutrient**:
 A single measured quantity attached to an Entry — protein, carbohydrate, fat,
@@ -55,9 +62,9 @@ Entries. Stored, but never displayed back as a scrollable transcript.
 _Avoid_: prompt, chat, input, utterance
 
 **Entry List**:
-The reviewable record of what the user ate — the only history surface in the app.
-Shows Entries, not Messages, each with its quantity editable and itself
-removable. Takes the place of a chat transcript.
+The reviewable record of what the user ate today — the only history surface in the
+app, and only ever the current Day. Shows Entries, not Messages, each with its
+quantity editable and itself removable. Takes the place of a chat transcript.
 _Avoid_: history, transcript, log, feed, diary
 
 **Identity**:
@@ -72,9 +79,19 @@ from Pace and from the Tuna, because a total that includes half-known food is a
 lie.
 _Avoid_: draft, incomplete, unconfirmed, partial
 
+**Lookup**:
+The AI's search for a food's Nutrient values at the moment an Entry is created.
+Performed fresh every time, never reused from a previous Lookup.
+_Avoid_: query, fetch, search, cache
+
+**Sourced**:
+The state of an Entry whose Nutrient values came from a Lookup that found a real
+citation, which is recorded alongside them.
+_Avoid_: verified, confirmed, official
+
 **Estimated**:
-The state of an Entry whose Nutrient values came from the AI rather than a
-database match. Always visibly marked, always editable.
+The state of an Entry whose Lookup found nothing and whose Nutrient values are the
+model's own recall. Always visibly marked, always editable.
 _Avoid_: guessed, approximate, inferred
 
 ### Interface

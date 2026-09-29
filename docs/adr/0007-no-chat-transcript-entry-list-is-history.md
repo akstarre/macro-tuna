@@ -14,10 +14,11 @@ and the Tuna rather than a growing wall of text.
 
 ## Consequences
 
-Messages are retained for auditing a suspicious number and for improving parsing,
-but there is no UI that depends on them, so their storage format is free to change.
-Entries must be editable both directly (the quantity control) and conversationally
-(asking the AI to fix one), which means the AI needs a way to address a specific
-existing Entry, not just create new ones. Since the user cannot scroll back to see
-what they said, every Entry must be self-describing enough to recognise without
-its originating Message.
+Narrowed by ADR-0009: the Entry List covers the current Day only, since Entries do
+not survive rollover. Messages are retained for auditing a suspicious number and
+for improving parsing, but there is no UI that depends on them, so their storage
+format is free to change. Entries must be editable both directly (the quantity
+control) and conversationally (asking the AI to fix one), which means the AI needs
+a way to address a specific existing Entry, not just create new ones. Since the
+user cannot scroll back to see what they said, every Entry must be self-describing
+enough to recognise without its originating Message.

@@ -1,3 +1,7 @@
+---
+status: superseded by ADR-0008
+---
+
 # The AI parses language; the database supplies the numbers
 
 Food logging happens through conversation, so an LLM interprets what the user
@@ -17,3 +21,11 @@ When no database match is found, the Entry may fall back to an AI estimate, but
 it must be visibly marked as estimated and be editable. Silent estimation is
 forbidden. This also means the food database, not the model, is the thing whose
 coverage determines product quality.
+
+## Superseded
+
+ADR-0008 replaces the local food database with live AI Lookups. The concern that
+motivated this ADR — that unsourced numbers destroy trust — is not withdrawn; it
+is instead handled by the Sourced/Estimated distinction and by never reusing a
+Lookup. Reinstating a local corpus behind the same interface remains the intended
+path if Lookup latency, cost, or accuracy prove unacceptable.
