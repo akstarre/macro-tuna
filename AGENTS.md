@@ -1,6 +1,7 @@
 # Macro Tuna
 
-A mobile web app.
+A web app for tracking calories and macronutrients, where all food logging happens
+through conversation with an AI. Runs in the browser; not iOS- or Android-specific.
 
 ## Agent skills
 

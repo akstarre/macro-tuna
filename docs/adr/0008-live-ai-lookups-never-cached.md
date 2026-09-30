@@ -1,3 +1,7 @@
+---
+status: narrowed by ADR-0011
+---
+
 # Nutrient values come from live AI Lookups, never cached
 
 There is no food database. When an Entry is created the AI performs a Lookup —
@@ -23,3 +27,10 @@ milliseconds, there is an API call per food, the app cannot log offline at all,
 and the same food logged twice may return slightly different numbers. All Lookups
 sit behind a single interface so a local corpus can be reinstated without
 touching anything else.
+
+## Narrowed
+
+ADR-0011 restricts live Search to brand and restaurant foods and resolves generic
+foods against a static USDA Food Table instead. The no-caching rule stands
+unchanged for Search; the Food Table is not a cache but immutable reference data
+fixed at build time.

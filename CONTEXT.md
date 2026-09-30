@@ -80,17 +80,27 @@ lie.
 _Avoid_: draft, incomplete, unconfirmed, partial
 
 **Lookup**:
-The AI's search for a food's Nutrient values at the moment an Entry is created.
-Performed fresh every time, never reused from a previous Lookup.
-_Avoid_: query, fetch, search, cache
+The resolution of a food's Nutrient values at the moment an Entry is created.
+Either a Table Lookup or a Search, depending on the food's volatility.
+_Avoid_: query, fetch, cache
+
+**Food Table**:
+The static USDA-derived file of generic foods shipped with the app and held in
+memory. Public domain, fixed at build time, never written to at runtime.
+_Avoid_: database, corpus, index, cache
+
+**Search**:
+A live web Lookup, used only for brand and restaurant foods whose values actually
+change. Performed fresh every time and never reused.
+_Avoid_: web search, API call, fetch
 
 **Sourced**:
-The state of an Entry whose Nutrient values came from a Lookup that found a real
-citation, which is recorded alongside them.
+The state of an Entry whose values came from the Food Table or from a Search that
+found a real citation, which is recorded alongside them.
 _Avoid_: verified, confirmed, official
 
 **Estimated**:
-The state of an Entry whose Lookup found nothing and whose Nutrient values are the
+The state of an Entry whose Search found nothing and whose Nutrient values are the
 model's own recall. Always visibly marked, always editable.
 _Avoid_: guessed, approximate, inferred
 
